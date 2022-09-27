@@ -1,0 +1,38 @@
+package beengine.api.event.player;
+
+import beengine.api.event.EventListener;
+import beengine.api.event.Cancellable;
+import beengine.api.event.RegisteredListener;
+import beengine.api.player.Player;
+import lombok.*;
+import lombok.experimental.Accessors;
+
+/**
+ * Called when a player changes their skin in-game.
+ */
+@Getter
+@Accessors(fluent = true)
+
+public class PlayerChangeSkinEvent extends PlayerEvent implements Cancellable {
+
+    private final SkinData oldSkin;
+    @Setter
+    private SkinData newSkin;
+
+    public PlayerChangeSkinEvent(Player player, SkinData oldSkin, SkinData newSkin) {
+        super(player);
+        this.oldSkin = oldSkin;
+        this.newSkin = newSkin;
+    }
+    
+    @Override
+    public void handle(EventListener handler, int depth) {
+        handler.onPlayerChangeSkin(this);
+    }
+    
+    private static RegisteredListener[] handlers = new RegisteredListener[0];
+    @Override
+    public RegisteredListener[] handlers() {
+        return handlers;
+    }
+}

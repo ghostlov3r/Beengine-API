@@ -1,0 +1,36 @@
+package beengine.api.event.player;
+
+import beengine.api.event.Cancellable;
+import beengine.api.event.Event;
+import beengine.api.event.EventListener;
+import beengine.event.RegisteredListener;
+import beengine.minecraft.MinecraftSession;
+import lombok.*;
+
+/**
+ * Called when a player connects with a username or UUID that is already used by another player on the server.
+ * If cancelled, the newly connecting session will be disconnected; otherwise, the existing player will be disconnected.
+ */
+@RequiredArgsConstructor
+@Getter
+public class PlayerDuplicateLoginEvent extends Event implements Cancellable {
+
+	/**
+	 * The message shown to the session which gets disconnected.
+	 */
+	@Setter private String disconnectMessage = "Logged in from another location";
+
+	private final MinecraftSession connectingSession;
+	private final MinecraftSession existingSession;
+	
+	@Override
+	public void handle(EventListener handler, int depth) {
+		handler.onPlayerDuplicateLogin(this);
+	}
+	
+	private static RegisteredListener[] handlers = new RegisteredListener[0];
+	@Override
+	public RegisteredListener[] handlers() {
+		return handlers;
+	}
+}

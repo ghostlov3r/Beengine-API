@@ -1,0 +1,60 @@
+package beengine.api.event.inventory;
+
+import beengine.api.event.Cancellable;
+import beengine.api.event.EventListener;
+import beengine.api.event.RegisteredListener;
+import beengine.api.item.Item;
+import beengine.api.player.Player;
+
+public class RepairItemEvent extends InventoryEvent implements Cancellable {
+    
+    private Item oldItem;
+    private Item newItem;
+    private Item materialItem;
+    private int cost;
+    private Player player;
+
+    public RepairItemEvent(AnvilInventory inventory, Item oldItem, Item newItem, Item materialItem, int cost, Player player) {
+        super(inventory);
+        this.oldItem = oldItem;
+        this.newItem = newItem;
+        this.materialItem = materialItem;
+        this.cost = cost;
+        this.player = player;
+    }
+
+    public Item oldItem() {
+        return this.oldItem;
+    }
+
+    public Item newItem() {
+        return this.newItem;
+    }
+
+    public Item materialItem() {
+        return this.materialItem;
+    }
+
+    public int cost() {
+        return this.cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+
+    public Player player() {
+        return this.player;
+    }
+    
+    @Override
+    public void handle(EventListener handler, int depth) {
+        handler.onItemRepair(this);
+    }
+    
+    private static RegisteredListener[] handlers = new RegisteredListener[0];
+    @Override
+    public RegisteredListener[] handlers() {
+        return handlers;
+    }
+}

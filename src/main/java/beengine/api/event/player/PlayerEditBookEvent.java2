@@ -1,0 +1,57 @@
+package beengine.api.event.player;
+
+import beengine.api.event.EventListener;
+import beengine.api.event.Cancellable;
+import beengine.api.event.RegisteredListener;
+import beengine.api.player.Player;
+import lombok.*;
+import lombok.experimental.Accessors;
+
+@Accessors(fluent = true)
+@Getter
+public class PlayerEditBookEvent extends PlayerEvent implements Cancellable {
+
+	/**
+	 * The book before it was modified.
+	 */
+	private final ItemWritableBookBase oldBook;
+
+	/**
+	 * The book after it was modified.
+	 * The new book may be a written book, if the book was signed.
+	 */
+	private ItemWritableBookBase newBook;
+
+	/**
+	 * The action of the event.
+	 */
+	private final BookEdit.Type action;
+
+	/**
+	 * An array containing the page IDs of modified pages.
+	 */
+	private final int[] modifiedPages;
+
+	public PlayerEditBookEvent(Player player, ItemWritableBookBase oldBook, ItemWritableBookBase newBook, BookEdit.Type action, int[] modifiedPages) {
+		super(player);
+		this.oldBook = oldBook;
+		this.newBook = newBook;
+		this.action = action;
+		this.modifiedPages = modifiedPages;
+	}
+	
+	public void setNewBook(ItemWritableBookBase newBook) {
+		this.newBook = newBook;
+	}
+	
+	@Override
+	public void handle(EventListener handler, int depth) {
+		handler.onPlayerEditBook(this);
+	}
+	
+	private static RegisteredListener[] handlers = new RegisteredListener[0];
+	@Override
+	public RegisteredListener[] handlers() {
+		return handlers;
+	}
+}

@@ -1,0 +1,53 @@
+package beengine.api.event.player;
+
+import beengine.api.event.Event;
+import beengine.api.event.EventListener;
+import beengine.event.RegisteredListener;
+import beengine.minecraft.MinecraftSession;
+import beengine.player.Player;
+
+import java.util.Objects;
+
+/**
+ * Allows the creation of players overriding the base Player class
+ */
+public class PlayerCreationEvent extends Event {
+	
+	private final MinecraftSession session;
+	
+	private final Class<? extends Player> baseClass;
+	private Class<? extends Player> actualClass;
+	
+	public PlayerCreationEvent (MinecraftSession session, Class<? extends Player> baseFactory) {
+		this.session = session;
+		this.baseClass = baseFactory;
+		this.actualClass = baseFactory;
+	}
+	
+	public MinecraftSession session () {
+		return session;
+	}
+	
+	public Class<? extends Player> baseClass() {
+		return baseClass;
+	}
+	
+	public Class<? extends Player> actualClass() {
+		return actualClass;
+	}
+	
+	public void setActualClass(Class<? extends Player> actualClass) {
+		this.actualClass = Objects.requireNonNull(actualClass);
+	}
+	
+	@Override
+	public void handle(EventListener handler, int depth) {
+		handler.onPlayerCreation(this);
+	}
+	
+	private static RegisteredListener[] handlers = new RegisteredListener[0];
+	@Override
+	public RegisteredListener[] handlers() {
+		return handlers;
+	}
+}

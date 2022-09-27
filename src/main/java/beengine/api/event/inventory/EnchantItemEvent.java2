@@ -1,0 +1,44 @@
+package beengine.api.event.inventory;
+
+import beengine.api.event.Cancellable;
+import beengine.api.event.EventListener;
+import beengine.api.event.RegisteredListener;
+import beengine.api.item.Item;
+import beengine.api.player.Player;
+import lombok.Getter;
+
+@Getter
+public class EnchantItemEvent extends InventoryEvent implements Cancellable {
+   
+    private Item oldItem;
+    private Item newItem;
+    private int xpCost;
+    private Player enchanter;
+
+    public EnchantItemEvent(EnchantInventory inventory, Item oldItem, Item newItem, int cost, Player p) {
+        super(inventory);
+        this.oldItem = oldItem;
+        this.newItem = newItem;
+        this.xpCost = cost;
+        this.enchanter = p;
+    }
+ 
+    public void setNewItem(Item newItem) {
+        this.newItem = newItem;
+    }
+    
+    public void setXpCost(int xpCost) {
+        this.xpCost = xpCost;
+    }
+    
+    @Override
+    public void handle(EventListener handler, int depth) {
+        handler.onItemEnchant(this);
+    }
+    
+    private static RegisteredListener[] handlers = new RegisteredListener[0];
+    @Override
+    public RegisteredListener[] handlers() {
+        return handlers;
+    }
+}

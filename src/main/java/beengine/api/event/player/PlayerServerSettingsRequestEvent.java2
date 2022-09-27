@@ -1,0 +1,34 @@
+package beengine.api.event.player;
+
+import beengine.api.event.EventListener;
+import beengine.event.RegisteredListener;
+import beengine.form.CustomForm;
+import beengine.player.Player;
+
+public class PlayerServerSettingsRequestEvent extends PlayerEvent<Player> {
+	
+	CustomForm response;
+	
+	public PlayerServerSettingsRequestEvent(Player player) {
+		super(player);
+	}
+	
+	public CustomForm response () {
+		return response;
+	}
+	
+	public void setResponse (CustomForm response) {
+		this.response = response;
+	}
+	
+	@Override
+	public void handle(EventListener handler, int depth) {
+		handler.onPlayerServerSettingsRequest(this);
+	}
+	
+	private static RegisteredListener[] handlers = new RegisteredListener[0];
+	@Override
+	public RegisteredListener[] handlers() {
+		return handlers;
+	}
+}

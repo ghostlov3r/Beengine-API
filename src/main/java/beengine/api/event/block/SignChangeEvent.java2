@@ -1,0 +1,61 @@
+package beengine.api.event.block;
+
+import beengine.api.event.Cancellable;
+import beengine.api.event.EventListener;
+import beengine.api.event.RegisteredListener;
+import beengine.api.player.Player;
+
+/**
+ * Called when a sign's text is changed by a player.
+ */
+public class SignChangeEvent extends BlockEvent implements Cancellable {
+
+	private final BlockSign block;
+	private final Player player;
+
+	/**
+	 * The text which will be on the sign after the event.
+	 */
+	private SignText newText;
+
+	public SignChangeEvent(BlockSign block, Player player, SignText newText) {
+		super(block);
+		this.block = block;
+		this.player = player;
+		this.newText = newText;
+	}
+
+	/**
+	 * @return The text currently on the sign.
+	 */
+	public final SignText oldText() {
+		return this.block().text();
+	}
+
+	public BlockSign block () {
+		return this.block;
+	}
+	
+	public void setNewText(SignText newText) {
+		this.newText = newText;
+	}
+	
+	public Player player() {
+		return player;
+	}
+	
+	public SignText newText() {
+		return newText;
+	}
+	
+	@Override
+	public void handle(EventListener handler, int depth) {
+		handler.onSignChange(this);
+	}
+	
+	private static RegisteredListener[] handlers = new RegisteredListener[0];
+	@Override
+	public RegisteredListener[] handlers() {
+		return handlers;
+	}
+}

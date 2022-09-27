@@ -1,0 +1,51 @@
+package beengine.api.event.inventory;
+
+import beengine.api.event.Cancellable;
+import beengine.api.event.EventListener;
+import beengine.api.event.RegisteredListener;
+import beengine.api.event.block.BlockEvent;
+import beengine.api.item.Item;
+import lombok.Getter;
+import lombok.Setter;
+
+/**
+ * Called when a furnace is about to consume a new fuel item.
+ */
+@Getter
+public class FurnaceBurnEvent extends BlockEvent implements Cancellable {
+
+    private final TileFurnace furnace;
+    private final Item fuel;
+    
+    /**
+     * The number of ticks that the given fuel will power the furnace for.
+     */
+    @Setter private int burnTime;
+    
+    /**
+     * Whether the fuel will be consumed.
+     *
+     * If false, the furnace will smelt as if it consumed fuel,
+     * but no fuel will be deducted.
+     */
+    @Setter private boolean isBurning;
+
+    public FurnaceBurnEvent(TileFurnace furnace, Item fuel, int burnTime) {
+        super(furnace.getBlock());
+        this.furnace = furnace;
+        this.fuel = fuel;
+        this.burnTime = burnTime;
+        this.isBurning = true;
+    }
+    
+    @Override
+    public void handle(EventListener handler, int depth) {
+        handler.onFurnaceBurn(this);
+    }
+    
+    private static RegisteredListener[] handlers = new RegisteredListener[0];
+    @Override
+    public RegisteredListener[] handlers() {
+        return handlers;
+    }
+}
