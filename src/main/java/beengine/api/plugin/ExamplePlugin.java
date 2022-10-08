@@ -28,9 +28,11 @@ public class ExamplePlugin extends AbstractPlugin implements EventListener {
 	@Command(name = {"kit create", "kit add"},
 			permission = "command.kit.create",
 			permissionMessage = "Сначала купи админку")
-	public void createKit (Player player,
-						   String kitName,
-						   @Default("diamond_sword apple") List<String> items) {
+	public void createKit (
+			Player player,
+			String kitName,
+			@Default("diamond_sword apple") List<String> items
+	) {
 		for (String item : items) {
 			// валидация итемов
 		}
@@ -40,7 +42,10 @@ public class ExamplePlugin extends AbstractPlugin implements EventListener {
 	@Command(name = "kit",
 			permission = "command.kit.get",
 			permissionMessage = "Сначала купи випку")
-	public void getKit (Player player, @Variants({"start", "vip"}) String kitName) {
+	public void getKit (
+			Player player,
+			@Variants({"start", "vip"}) String kitName
+	) {
 		List<String> items = kits.get(kitName);
 		for (String item : items) {
 			// ...

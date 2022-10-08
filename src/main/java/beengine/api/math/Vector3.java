@@ -2,6 +2,7 @@ package beengine.api.math;
 
 import beengine.api.util.function.IntTriConsumer;
 import beengine.api.util.function.IntTriPredicate;
+import beengine.api.world.World;
 import lombok.ToString;
 
 import javax.annotation.Nullable;
@@ -41,6 +42,10 @@ public class Vector3 {
 	
 	public Vector3 toVector () {
 		return new Vector3(x, y, z);
+	}
+
+	public long blockHash () {
+		return World.blockHash(floorX(), floorY(), floorZ());
 	}
 	
 	/* ------------------------------------------------------- */

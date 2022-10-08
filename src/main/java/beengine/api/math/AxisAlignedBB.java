@@ -1,11 +1,13 @@
 package beengine.api.math;
 
+import beengine.api.util.function.IntTriConsumer;
 import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.ToString;
 
 import javax.annotation.Nullable;
 
+import static beengine.api.math.Facing.*;
 import static beengine.api.util.Utils.inRange;
 import static beengine.api.util.Utils.insideRange;
 
@@ -400,7 +402,7 @@ public final class AxisAlignedBB implements Cloneable {
 	 * collided with. Returns a RayTraceResult with colliding vector closest to the start position.
 	 * Returns null if no colliding point was found.
 	 */
-	/*public @Nullable
+	public @Nullable
 	RayTraceResult calculateIntercept(Vector3 pos1, Vector3 pos2) {
 		Vector3 v1, v2, v3, v4, v5, v6;
 		
@@ -464,5 +466,5 @@ public final class AxisAlignedBB implements Cloneable {
 				}
 			}
 		}
-	}*/
+	}
 }
