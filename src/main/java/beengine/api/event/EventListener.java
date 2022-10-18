@@ -102,7 +102,7 @@ public interface EventListener {
 	
 	default void onInventoryOpen (InventoryOpenEvent event) {}
 	
-	//default void onInventoryPickupArrow (InventoryPickupArrowEvent event) {}
+	default void onInventoryPickupArrow (InventoryPickupArrowEvent event) {}
 	
 	default void onInventoryPickupItem (InventoryPickupItemEvent event) {}
 	

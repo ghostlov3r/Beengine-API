@@ -1,10 +1,12 @@
 package beengine.api.entity;
 
+import beengine.api.entity.util.Animation;
 import beengine.api.event.entity.EntityDamageEvent;
 import beengine.api.event.entity.EntityRegainHealthEvent;
 import beengine.api.math.Facing;
 import beengine.api.math.Vector3;
 import beengine.api.player.Player;
+import beengine.api.util.Promise;
 
 import java.util.Collection;
 import java.util.Set;
@@ -170,29 +172,19 @@ public interface Entity {
 
 	void addMotion(float x, float y, float z);
 
-	boolean teleport(Vector3 pos);
-
-	/*boolean teleport(Vector3 pos, @Nullable Runnable postTeleportAction);
-
-	boolean teleport(Position position);
-
-	boolean teleport(Position position, @Nullable Runnable postTeleportAction);
-
-	boolean teleport(Location location);
-
-	boolean teleport(Location location, @Nullable Runnable postTeleportAction);*/
+	Promise<Object> teleport(Vector3 pos);
 
 	void flagForDespawn();
 
 	boolean isFlaggedForDespawn();
 
-	/*void broadcastAnimation(Animation animation);
+	void broadcastAnimation(Animation animation);
 
 	void broadcastAnimation(Animation animation, Collection<Player> targets);
 
-	void broadcastSound(Sound sound);
+	//void broadcastSound(Sound sound);
 
-	void broadcastSound(Sound sound, Collection<Player> targets);*/
+	//void broadcastSound(Sound sound, Collection<Player> targets);
 
 	EntityDamageEvent lastDamageCause();
 

@@ -1,5 +1,6 @@
 package beengine.api.event.inventory;
 
+import beengine.api.entity.projectile.EntityArrow;
 import beengine.api.event.Cancellable;
 import beengine.api.event.EventListener;
 import beengine.api.event.RegisteredListener;

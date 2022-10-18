@@ -45,7 +45,7 @@ public interface EntityLiving extends Entity {
 
 	float followRange();
 
-	boolean hasLineOfSight(Entity entity);
+	// boolean hasLineOfSight(Entity entity);
 
 	void jump();
 
