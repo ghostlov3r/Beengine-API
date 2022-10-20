@@ -1,12 +1,14 @@
 package beengine.api.entity;
 
 import beengine.api.block.Block;
+import beengine.api.entity.util.EffectManager;
 import beengine.api.item.Item;
 import beengine.api.math.Vector3;
 
 import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.List;
+import java.util.Random;
 
 public interface EntityLiving extends Entity {
 	String name();
@@ -57,16 +59,20 @@ public interface EntityLiving extends Entity {
 
 	void knockBack(float x, float z, float base);
 
-	Collection<Item> getDrops();
+	Collection<? extends Item> getDrops();
 
 	int getXpDropAmount();
 
-	List<Block> getLineOfSight(int maxDistance);
+	List<? extends Block> getLineOfSight(int maxDistance);
 
-	List<Block> getLineOfSight(int maxDistance, int maxLength);
+	List<? extends Block> getLineOfSight(int maxDistance, int maxLength);
 
 	@Nullable
 	Block getTargetBlock(int maxDistance);
 
 	void lookAt(Vector3 target);
+
+	EffectManager effects();
+
+	Random random();
 }

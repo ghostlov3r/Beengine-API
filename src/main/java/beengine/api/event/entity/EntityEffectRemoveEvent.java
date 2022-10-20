@@ -1,6 +1,6 @@
 package beengine.api.event.entity;
 
-import beengine.api.effect.EffectInstance;
+import beengine.api.effect.Effect;
 import beengine.api.entity.Entity;
 import beengine.api.event.EventListener;
 import beengine.api.event.RegisteredListener;
@@ -10,7 +10,7 @@ import beengine.api.event.RegisteredListener;
  */
 public class EntityEffectRemoveEvent extends EntityEffectEvent {
 
-	public EntityEffectRemoveEvent(Entity entity, EffectInstance effect) {
+	public EntityEffectRemoveEvent(Entity entity, Effect effect) {
 		super(entity, effect);
 	}
 

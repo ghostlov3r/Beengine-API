@@ -14,7 +14,7 @@ public abstract class InventoryEvent extends Event {
 
 	private final Inventory inventory;
 
-	public final Set<Player> viewers() {
+	public final Set<? extends Player> viewers() {
 		return this.inventory.viewers();
 	}
 

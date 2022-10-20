@@ -1,6 +1,6 @@
 package beengine.api.event.entity;
 
-import beengine.api.effect.EffectInstance;
+import beengine.api.effect.Effect;
 import beengine.api.entity.Entity;
 import beengine.api.event.EventListener;
 import beengine.api.event.RegisteredListener;
@@ -14,13 +14,14 @@ import javax.annotation.Nullable;
 @Getter
 public class EntityEffectAddEvent extends EntityEffectEvent {
 
-    private final @Nullable EffectInstance oldEffect;
+    private final @Nullable
+	Effect oldEffect;
 
-    public EntityEffectAddEvent (Entity entity, EffectInstance effect) {
+    public EntityEffectAddEvent (Entity entity, Effect effect) {
         this(entity, effect, null);
     }
 
-    public EntityEffectAddEvent (Entity entity, EffectInstance effect, @Nullable EffectInstance oldEffect) {
+    public EntityEffectAddEvent (Entity entity, Effect effect, @Nullable Effect oldEffect) {
         super(entity, effect);
         this.oldEffect = oldEffect;
     }

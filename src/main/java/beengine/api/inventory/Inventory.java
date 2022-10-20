@@ -18,11 +18,11 @@ public interface Inventory {
 
 	Item[] contents();
 
-	Map<Integer, Item> getContents();
+	Map<Integer, ? extends Item> getContents();
 
-	Map<Integer, Item> getContents(boolean includeEmpty);
+	Map<Integer, ? extends Item> getContents(boolean includeEmpty);
 
-	void setContents(Map<Integer, Item> items);
+	void setContents(Map<Integer, ? extends Item> items);
 
 	void setContents(Item[] items);
 
@@ -36,9 +36,9 @@ public interface Inventory {
 
 	boolean canAddItem(Item item);
 
-	List<Item> addItem(Item... slots);
+	List<? extends Item> addItem(Item... slots);
 
-	List<Item> removeItem(Item... slots);
+	List<? extends Item> removeItem(Item... slots);
 
 	void removeAt(int index);
 
@@ -54,5 +54,5 @@ public interface Inventory {
 
 	void removeListener(InventoryListener listener);
 
-	Set<Player> viewers();
+	Set<? extends Player> viewers();
 }

@@ -5,7 +5,7 @@ import beengine.api.math.Facing;
 
 import javax.annotation.Nullable;
 
-public interface Item {
+public interface Item extends Cloneable {
 
 	int id();
 	int meta();
@@ -30,4 +30,5 @@ public interface Item {
 	int blockToolType();
 	int blockToolHarvestLevel();
 	float getMiningEfficiency (boolean isCorrectTool);
+	Item clone ();
 }

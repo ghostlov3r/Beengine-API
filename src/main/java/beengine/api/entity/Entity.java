@@ -14,6 +14,8 @@ import java.util.UUID;
 
 public interface Entity {
 
+	Location pos();
+
 	//void init(Location location);
 
 	void spawn();
@@ -84,7 +86,7 @@ public interface Entity {
 
 	Vector3 directionVector();
 
-	Set<Player> viewers();
+	Set<? extends Player> viewers();
 
 	float eyeHeight();
 
@@ -144,6 +146,8 @@ public interface Entity {
 
 	void setOnFire(int seconds);
 
+	Vector3 motion ();
+
 	boolean setMotion(Vector3 motion);
 
 	boolean setMotion(float x, float y, float z);
@@ -180,7 +184,7 @@ public interface Entity {
 
 	void broadcastAnimation(Animation animation);
 
-	void broadcastAnimation(Animation animation, Collection<Player> targets);
+	void broadcastAnimation(Animation animation, Collection<? extends Player> targets);
 
 	//void broadcastSound(Sound sound);
 
